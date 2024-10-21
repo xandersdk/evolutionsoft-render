@@ -12,13 +12,15 @@ def home(request):
 def guardarEmpresa(request):
     if request.method == 'POST':
         ruc = request.POST['ruc']
-        nombre_empresa = request.POST['nombre_empresa']
+        nombre = request.POST['nombre_empresa']
         descripcion = request.POST['descripcion']
+        logo= request.FILES.get("foto")  
 
         nuevaEmpresa = Empresa.objects.create(
             ruc=ruc,
-            nombre_empresa=nombre_empresa,
-            descripcion=descripcion
+            nombre=nombre,
+            descripcion=descripcion,
+            logo=logo
         )
 
         messages.success(request, "Empresa registrada exitosamente")
@@ -32,3 +34,9 @@ def listadoEmpresas(request):
 # Renderizando formulario para nueva empresa
 def nuevaEmpresa(request):
     return render(request, 'nuevaEmpresa.html')
+
+def eliminarEmpresa(request, id):
+    empresaEliminar = Empresa.objects.get(id_=id)
+    empresaEliminar.delete()
+    messages.success(request, 'Jugador eliminado exitosamente')
+    return redirect('listadoEmpresas')

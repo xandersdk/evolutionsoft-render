@@ -26,7 +26,7 @@
           <th class="tablecolor">Logo</th>
           <th class="tablecolor">Acciones</th>
         </tr>
-        
+
       </thead>
       <tbody>
         {% for empresa in empresas %}
@@ -37,7 +37,7 @@
           <td>{{ empresa.descripcion }}</td>
           <td class="text-center">
             {% if empresa.logo %}
-            <img src="{{ empresa.foto.url }}" alt="Foto del cliente" class="img-thumbnail img-square" style="width: 60px; height: 60px; object-fit: cover; border-radius: 0;">
+            <img src="{{ empresa.logo.url }}" alt="Foto del cliente" class="img-thumbnail img-square" style="width: 60px; height: 60px; object-fit: cover; border-radius: 0;">
             <div class="d-block text-center mt-2"> <!-- div class="btn-group mt-2" -->
               <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Opciones
@@ -52,12 +52,8 @@
             {% endif %}
           </td>
           <td>
-            <a href="{% url 'editarCliente' cliente.id %}" class="btn btn-warning">
-              <i class="fas fa-edit"></i>
-            </a>
-            <a href="{% url 'eliminarCliente' cliente.id %}" onclick="return confirm('¿Estás seguro?')" class="btn btn-danger">
-              <i class="fas fa-trash-alt"></i>
-            </a>
+            <a href="/editarEquipo/{{ equipo.id_equi }}" class="btn btn-warning">Editar</a>
+            <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">Eliminar</a>
           </td>
         </tr>
         {% endfor %}
@@ -65,7 +61,30 @@
     </table>
   </div>
 </div>
-
+<script type="text/javascript">
+  function eliminarEmpresa(url){
+      iziToast.question({
+          timeout: 15000,
+          close: true,
+          overlay: true,
+          displayMode: 'once',
+          id: 'question',
+          zindex: 999,
+          title: 'CONFIRMACIÓN',
+          message: '¿Está seguro de eliminar el equipo seleccionado?',
+          position: 'topRight',
+          buttons: [
+              ['<button><b>SI</b></button>', function (instance, toast) {
+                  instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                  window.location.href=url;
+              }, true],
+              ['<button>NO</button>', function (instance, toast) {
+                  instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+              }],
+          ]
+      });
+  }
+</script>
 <script type="text/javascript">
   $('#tbl-clientes').DataTable({
     "language": {
