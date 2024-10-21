@@ -9,9 +9,10 @@
 </div>
 <div class="container">
   <div class="d-flex justify-content-end mb-4">
-    <a href="" class="btn btn-primary">Agregar Nuevo</a>
+    <a href="{% url 'nuevaEmpresa' %}" class="btn btn-primary">Agregar Nuevo</a>
   </div>
 </div>
+
 
 <div class="container">
   <div class="table-responsive">
@@ -19,36 +20,30 @@
       <thead>
         <tr>
           <th class="tablecolor">ID</th>
-          <th class="tablecolor">Cédula</th>
-          <th class="tablecolor">Apellido</th>
+          <th class="tablecolor">Ruc</th>
           <th class="tablecolor">Nombre</th>
-          <th class="tablecolor">Dirección</th>
-          <th class="tablecolor">Teléfono</th>
-          <th class="tablecolor">Email</th>
-          <th class="tablecolor">Foto</th>
+          <th class="tablecolor">Descripcion</th>
+          <th class="tablecolor">Logo</th>
           <th class="tablecolor">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {% for cliente in clientes %}
+        {% for empresa in empresas %}
         <tr>
-          <td>{{ cliente.id }}</td>
-          <td>{{ cliente.cedula }}</td>
-          <td>{{ cliente.apellido }}</td>
-          <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.direccion }}</td>
-          <td>{{ cliente.telefono }}</td>
-          <td>{{ cliente.email }}</td>
+          <td>{{ empresa.id }}</td>
+          <td>{{ empresa.ruc }}</td>
+          <td>{{ empresa.nombre }}</td>
+          <td>{{ empresa.descripcion }}</td>
           <td class="text-center">
-            {% if cliente.foto %}
-            <img src="{{ cliente.foto.url }}" alt="Foto del cliente" class="img-thumbnail img-square" style="width: 60px; height: 60px; object-fit: cover; border-radius: 0;">
+            {% if empresa.logo %}
+            <img src="{{ empresa.foto.url }}" alt="Foto del cliente" class="img-thumbnail img-square" style="width: 60px; height: 60px; object-fit: cover; border-radius: 0;">
             <div class="d-block text-center mt-2"> <!-- div class="btn-group mt-2" -->
               <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Opciones
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ cliente.foto.url }}" target="_blank">Ver Foto</a></li>
-                <li><a class="dropdown-item" href="{{ cliente.foto.url }}" download>Descargar Foto</a></li>
+                <li><a class="dropdown-item" href="{{ cliente.logo.url }}" target="_blank">Ver Foto</a></li>
+                <li><a class="dropdown-item" href="{{ cliente.logo.url }}" download>Descargar Foto</a></li>
               </ul>
             </div>
             {% else %}

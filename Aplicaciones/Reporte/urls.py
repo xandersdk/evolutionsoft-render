@@ -5,7 +5,8 @@ from.import views
 
 urlpatterns=[
     path('',views.home),
-    path('listadoEmpresa/', views.listadoEmpresa, name='listadoEmpresa'),
+    path('listadoEmpresas/', views.listadoEmpresas, name='listadoEmpresas'),
+    path('nuevaEmpresa/', views.nuevaEmpresa, name='nuevaEmpresa'),
    
 
 

@@ -1,0 +1,62 @@
+
+{% extends "./plantilla.html" %}
+{% block body %}
+<div class="col-md-3">
+    <form action="/guardarEmpresa/" method="post" enctype="multipart/form-data" id="frm_nuevo_empresa">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="ruc"><b>RUC</b></label>
+            <input type="text" name="ruc" id="ruc" class="form-control" placeholder="Ingrese el RUC de la empresa" required style="color: black;"/>
+        </div>
+        <div class="form-group mb-3">
+            <label for="nombre_empresa"><b>Nombre de la Empresa</b></label>
+            <input type="text" name="nombre_empresa" id="nombre_empresa" class="form-control" placeholder="Ingrese el nombre de la empresa" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="descripcion"><b>Descripción</b></label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Ingrese la descripción de la empresa" required></textarea>
+        </div>
+    </form>
+</div>
+<script>
+    $("#frm_nuevo_emmpresa").validate({
+    rules: {
+        ruc: {
+            required: true,
+            digits: true,
+            minlength: 13,
+            maxlength: 13
+        },
+        nombre_empresa: {
+            required: true,
+            lettersonly: true,
+            minlength: 2
+        },
+        descripcion: {
+            required: true,
+        },
+        // Validaciones existentes
+        // ...
+    },
+    messages: {
+        ruc: {
+            required: "Por favor ingrese el RUC de la empresa",
+            digits: "Solo se permiten números",
+            minlength: "El RUC debe tener exactamente 13 dígitos",
+            maxlength: "El RUC debe tener exactamente 13 dígitos"
+        },
+        nombre_empresa: {
+            required: "Por favor ingrese el nombre de la empresa",
+            lettersonly: "Solo se permite letras",
+            minlength: "El nombre debe tener al menos 2 letras",
+        },
+        descripcion: {
+            required: "Por favor ingrese la descripción de la empresa",
+        },
+        // Mensajes existentes
+        // ...
+    }
+});
+
+</script>
+{% endblock %}
