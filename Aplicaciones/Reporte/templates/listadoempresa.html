@@ -52,7 +52,7 @@
             {% endif %}
           </td>
           <td>
-            <a href="/editarEquipo/{{ equipo.id_equi }}" class="btn btn-warning">Editar</a>
+            <a href="/editarEmpresa/{{ empresa.id }}" class="btn btn-warning">Editar</a>
             <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">Eliminar</a>
           </td>
         </tr>
@@ -71,7 +71,7 @@
           id: 'question',
           zindex: 999,
           title: 'CONFIRMACIÓN',
-          message: '¿Está seguro de eliminar el equipo seleccionado?',
+          message: '¿Está seguro de eliminar la empresa seleccionado?',
           position: 'topRight',
           buttons: [
               ['<button><b>SI</b></button>', function (instance, toast) {

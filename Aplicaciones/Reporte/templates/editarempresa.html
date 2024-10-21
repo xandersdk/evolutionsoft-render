@@ -1,0 +1,104 @@
+{% extends "./plantilla.html" %}
+{% block body %}
+<br>
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card fluid-border shadow-sm">
+            <div class="card-header text-center" style="background-color: #76d7c4; color: #000000;">
+                <h4><b>Editar Empresa</b></h4>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'procesarActualizacionEmpresa' %}" enctype="multipart/form-data" id="frm_editar_empresa" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ empresaEditar.id }}">
+
+                    <div class="form-group mb-3">
+                        <label for="ruc"><b>RUC:</b></label>
+                        <input type="text" name="ruc" id="ruc" class="form-control" value="{{ empresaEditar.ruc }}" placeholder="Ingrese el RUC de la empresa" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="nombre_empresa"><b>Nombre de la Empresa:</b></label>
+                        <input type="text" name="nombre_empresa" id="nombre_empresa" class="form-control" value="{{ empresaEditar.nombre }}" placeholder="Ingrese el nombre de la empresa" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="descripcion"><b>Descripción:</b></label>
+                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Ingrese la descripción de la empresa" required>{{ empresaEditar.descripcion }}</textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="foto"><b>Logo:</b></label>
+                        <input type="file" accept="image/*" class="form-control" name="foto" id="foto" />
+
+                        {% if empresaEditar.logo %}
+                        <br>
+                        <a href="{{ empresaEditar.logo.url }}" target="_blank">
+                            <img src="{{ empresaEditar.logo.url }}" alt="Logo de la empresa" width="100" height="100">
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                        <a href="{% url 'listadoEmpresas' %}" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<script>
+    $("#frm_editar_empresa").validate({
+        rules: {
+            ruc: {
+                required: true,
+                digits: true,
+                minlength: 13,
+                maxlength: 13
+            },
+            nombre_empresa: {
+                required: true,
+                lettersonly: true,
+                minlength: 2
+            },
+            descripcion: {
+                required: true,
+            },
+            foto: {
+                required: function(element) {
+                    // Solo se requiere si se selecciona un nuevo logo
+                    return $(element).val() !== "";
+                }
+            }
+        },
+        messages: {
+            ruc: {
+                required: "Por favor ingrese el RUC de la empresa",
+                digits: "Solo se permiten números",
+                minlength: "El RUC debe tener exactamente 13 dígitos",
+                maxlength: "El RUC debe tener exactamente 13 dígitos"
+            },
+            nombre_empresa: {
+                required: "Por favor ingrese el nombre de la empresa",
+                lettersonly: "Solo se permite letras",
+                minlength: "El nombre debe tener al menos 2 letras",
+            },
+            descripcion: {
+                required: "Por favor ingrese la descripción de la empresa",
+            },
+            foto: {
+                required: "Por favor seleccione un logo si desea actualizarlo",
+            }
+        }
+    });
+
+    // Custom validation method for letters only
+    $.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+    }, "Solo se permite letras");
+</script>
+
+{% endblock %}
