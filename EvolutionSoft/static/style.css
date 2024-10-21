@@ -31,6 +31,9 @@ body {
 body.demos .section {
     background: url(images/bg.png) repeat top center #f2f3f5;
 }
+.custom-title {
+    font-size: 30px; /* Cambia el tamaño según lo necesites */
+}
 
 body.demos .section-title img {
     max-width: 280px;
