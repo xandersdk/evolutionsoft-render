@@ -1,0 +1,77 @@
+{% extends "./plantilla.html" %}
+{% block body %}
+
+<div class="container-fluid mt-12">
+  <div class="card-title text-center">
+    <h3><b>Listado de Encargados</b></h3>
+  </div>
+</div>
+<div class="container">
+  <div class="d-flex justify-content-end mb-4">
+    <a href="{% url 'nuevoEncargado' %}" class="btn btn-primary">Agregar Nuevo</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover" id="tbl-encargados">
+      <thead>
+        <tr>
+          <th class="tablecolor">ID</th>
+          <th class="tablecolor">Cédula</th>
+          <th class="tablecolor">Apellido Paterno</th>
+          <th class="tablecolor">Apellido Materno</th>
+          <th class="tablecolor">Nombres</th>
+          <th class="tablecolor">Cargo</th>
+          <th class="tablecolor">Teléfono</th>
+          <th class="tablecolor">Email</th>
+          <th class="tablecolor">Empresa</th>
+          <th class="tablecolor">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for encargado in encargados %}
+        <tr>
+          <td>{{ encargado.id }}</td>
+          <td>{{ encargado.cedula }}</td>
+          <td>{{ encargado.apellido_paterno }}</td>
+          <td>{{ encargado.apellido_materno }}</td>
+          <td>{{ encargado.nombres }}</td>
+          <td>{{ encargado.cargo }}</td>
+          <td>{{ encargado.telefono }}</td>
+          <td>{{ encargado.email }}</td>
+          <td>{{ encargado.empresa.nombre }}</td>
+
+          <td>
+            <a href="{% url 'editarEncargado' encargado.id %}" class="btn btn-warning">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a href="{% url 'eliminarEncargado' encargado.id %}" onclick="return confirm('¿Estás seguro?')" class="btn btn-danger">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#tbl-encargados').DataTable({
+    "language": {
+      "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+    },
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        extend: 'pdfHtml5',
+        messageTop: 'REPORTE DE ENCARGADOS - DJANGO Y DATATABLES.'
+      },
+      'print',
+      'csv'
+    ]
+  });
+</script>
+
+{% endblock %}
