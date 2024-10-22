@@ -93,8 +93,10 @@
                 required: true,
             },
             telefono: {
-                required: true,
-                number: true,
+              required: true,
+              digits: true,
+              minlength: 10,
+              maxlength: 10
             },
             email: {
                 required: true,
@@ -135,7 +137,9 @@
             },
             telefono: {
                 required: "Por favor ingrese el teléfono del empleado",
-                number: "Ingrese un número válido",
+                digits: "Solo se permiten números",
+                minlength: "El telefono debe tener exactamente 10 dígitos",
+                maxlength: "El telefono debe tener exactamente 10 dígitos"
             },
             email: {
                 required: "Por favor ingrese el email del empleado",
