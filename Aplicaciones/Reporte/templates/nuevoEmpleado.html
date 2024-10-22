@@ -1,0 +1,129 @@
+{% extends "./plantilla.html" %}
+{% block body %}
+
+
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="card border-2">
+        <div class="card-header text-center" style="background-color: #76d7c4; color: #000000;"  >
+          <h4><b>Agregar Nuevo Empleado</b></h4>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'guardarEmpleado' %}" enctype="multipart/form-data" id="frm_nuevo_empleado" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="cedula"><b>Cédula</b></label>
+                <input type="text" name="cedula" id="cedula" class="form-control" placeholder="Ingrese la cédula del empleado" required style="color: black;"/>
+            </div>
+            <div class="form-group mb-3">
+              <label for="apellido_paterno"><b>Apellido Paterno</b></label>
+              <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control" placeholder="Ingrese el apellido paterno del empleado" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="apellido_materno"><b>Apellido Materno</b></label>
+              <input type="text" name="apellido_materno" id="apellido_materno" class="form-control" placeholder="Ingrese el apellido materno del empleado" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="nombres"><b>Nombres</b></label>
+              <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Ingrese el nombres del empleado" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="direccion"><b>Dirección</b></label>
+              <textarea name="direccion" id="direccion" class="form-control" rows="3" placeholder="Ingrese la dirección del empleado" required></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="telefono"><b>Teléfono</b></label>
+              <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese el teléfono del empleado" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="email"><b>Email</b></label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="Ingrese el email del empleado" required>
+            </div>
+
+            <br>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-danger">Guardar</button>
+              <a href="{% url 'listadoEmpleados' %}" class="btn btn-primary ms-2">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+
+<script>
+    $("#frm_nuevo_empleado").validate({
+        rules: {
+            cedula: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
+            },
+            apellido_paterno: {
+                required: true,
+                lettersonly: true,
+                minlength: 2
+            },
+            nombres: {
+                required: true,
+                lettersonly: true,
+                minlength: 2
+            },
+            direccion: {
+                required: true,
+            },
+            telefono: {
+                required: true,
+                number: true,
+            },
+            email: {
+                required: true,
+                email: true,
+
+            }
+        },
+
+        messages: {
+            cedula: {
+                required: "Por favor ingrese la cédula del empleado",
+                digits: "Solo se permiten números",
+                minlength: "La cédula debe tener exactamente 10 dígitos",
+                maxlength: "La cédula debe tener exactamente 10 dígitos"
+            },
+            apellido_paterno: {
+                required: "Por favor ingrese el apellido paterno del empleado",
+                lettersonly: "Solo se permite letras",
+                minlength: "El apellido debe tener al menos 2 letras",
+            },
+            nombres: {
+                required: "Por favor ingrese el nombres del empleado",
+                lettersonly: "Solo se permite letras",
+                minlength: "El nombre debe tener al menos 2 letras",
+            },
+            direccion: {
+                required: "Por favor ingrese la dirección del empleado",
+            },
+            telefono: {
+                required: "Por favor ingrese el teléfono del empleado",
+                number: "Ingrese un número válido",
+            },
+            email: {
+                required: "Por favor ingrese el email del empleado",
+                email: "Ingrese un email válido",
+
+            }
+        }
+    });
+
+    // Custom validation methods
+    $.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+    }, "Solo se permite letras");
+</script>
+
+
+
+{% endblock %}
