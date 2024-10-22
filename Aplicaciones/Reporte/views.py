@@ -1,7 +1,11 @@
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect
+from datetime import datetime
+from django.core.files.storage import default_storage
+from django.db.models.deletion import ProtectedError
 from .models import Empresa
+from.models import Empleado
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -15,7 +19,7 @@ def guardarEmpresa(request):
         ruc = request.POST['ruc']
         nombre = request.POST['nombre_empresa']
         descripcion = request.POST['descripcion']
-        logo= request.FILES.get("foto")  
+        logo= request.FILES.get("foto")
 
         nuevaEmpresa = Empresa.objects.create(
             ruc=ruc,
@@ -71,3 +75,19 @@ def procesarActualizacionEmpresa(request):
             messages.error(request, 'El Cliente no existe')
 
     return redirect('listadoEmpresas')
+
+#-------------------------Empleado------------------------------------------------------------------------------------------
+
+
+# Renderizando el template de listado de empleados
+def listadoEmpleado(request):
+    empleadosBdd = Empleado.objects.all()
+    return render(request, 'listadoEmpleados.html', {'empleados': empleadosBdd})
+
+
+# Eliminar empleado
+def eliminarEmpleado(request, id):
+    empleadoEliminar = Empleado.objects.get(id=id)
+    empleadoEliminar.delete()
+    messages.success(request, "Empleado eliminado exitosamente")
+    return redirect('listadoEmpleados')

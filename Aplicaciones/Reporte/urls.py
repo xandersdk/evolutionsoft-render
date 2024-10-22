@@ -11,4 +11,9 @@ urlpatterns=[
     path('eliminarEmpresa/<id>', views.eliminarEmpresa),
     path('editarEmpresa/<id>', views.editarEmpresa),
     path('procesarActualizacionEmpresa/', views.procesarActualizacionEmpresa, name='procesarActualizacionEmpresa'),
+
+#-----------------------------------------------------------------------------------------------------------------
+    path('listadoEmpleados/', views.listadoEmpleado, name='listadoEmpleados'),
+    path('eliminarEmpleado/<id>/', views.eliminarEmpleado, name='eliminarEmpleado'),
+
 ]
