@@ -3,8 +3,8 @@
 
   <div class="row justify-content-center">
     <div class="col-md-7">
-      <div class="card fluid-border shadow-sm" >
-        <div class="card-header text-center"  style="background-color: #76d7c4; color: #000000;" >
+      <div class="card fluid-border shadow-sm">
+        <div class="card-header text-center" style="background-color: #76d7c4; color: #000000;">
           <h4><b>Editar Empleado</b></h4>
         </div>
         <div class="card-body">
@@ -29,7 +29,7 @@
 
             <div class="form-group mb-3">
               <label for="nombres"><b>Nombres:</b></label>
-              <input type="text" name="nombres" id="nombres" class="form-control" value="{{ empleadoEditar.nombres }}" placeholder="Ingrese el nombres del empleado" required>
+              <input type="text" name="nombres" id="nombres" class="form-control" value="{{ empleadoEditar.nombres }}" placeholder="Ingrese los nombres del empleado" required>
             </div>
 
             <div class="form-group mb-3">
@@ -47,21 +47,20 @@
               <input type="email" name="email" id="email" class="form-control" value="{{ empleadoEditar.email }}" placeholder="Ingrese el email del empleado" required>
             </div>
 
-            <div class="form-group mb-3">
+            <!--<div class="form-group mb-3">
               <label for="empresa"><b>Empresa:</b></label>
-              <select name="empresa" id="empresa" class="form-control" required>
+              <select name="empresa" id="empresa" class="form-control">
+                <option value="">Seleccione una empresa</option>
                 {% for empresa in empresas %}
-                  <option value="{{ empresa.id }}" {% if empresa.id == empleadoEditar.empresa.id %}selected{% endif %}>{{ empresa.nombre }}</option>
+                <option value="{{ empresa.id }}" {% if empresa.id == empleadoEditar.empresa.id %}selected{% endif %}>{{ empresa.nombre }}</option>
                 {% endfor %}
               </select>
+            </div>-->
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-success">Actualizar</button>
+              <a href="{% url 'listadoEmpleados' %}" class="btn btn-primary ms-2">Cancelar</a>
             </div>
-
-
-              <div class="text-center">
-                <button type="submit" class="btn btn-success">Actualizar</button>
-                <a href="{% url 'listadoEmpleados' %}" class="btn btn-primary ms-2">Cancelar</a>
-              </div>
-
           </form>
         </div>
       </div>
@@ -70,7 +69,7 @@
 <br>
 
 <script>
-    $("#frm_nuevo_empleado").validate({
+    $("#frm_editar_empleado").validate({
         rules: {
             cedula: {
                 required: true,
@@ -88,7 +87,6 @@
                 lettersonly: true,
                 minlength: 2
             },
-
             nombres: {
                 required: true,
                 lettersonly: true,
@@ -104,10 +102,11 @@
             email: {
                 required: true,
                 email: true,
-
+            },
+            empresa: {
+                  required: true
             }
         },
-
         messages: {
             cedula: {
                 required: "Por favor ingrese la cédula del empleado",
@@ -126,7 +125,7 @@
                 minlength: "El apellido debe tener al menos 2 letras",
             },
             nombres: {
-                required: "Por favor ingrese el nombres del empleado",
+                required: "Por favor ingrese los nombres del empleado",
                 lettersonly: "Solo se permite letras",
                 minlength: "El nombre debe tener al menos 2 letras",
             },
@@ -140,7 +139,9 @@
             email: {
                 required: "Por favor ingrese el email del empleado",
                 email: "Ingrese un email válido",
-
+            },
+            empresa: {
+                required: "Seleccione un concierto"
             }
         }
     });
@@ -150,7 +151,5 @@
         return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
     }, "Solo se permite letras");
 </script>
-
-
 
 {% endblock %}

@@ -110,7 +110,7 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active"><a class="nav-link" href="/">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link" href="{% url 'listadoEmpresas' %}">Empresa</a></li>
-						<li class="nav-item"><a class="nav-link" href="">Empleados </a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'listadoEmpleados' %}">Empleados </a></li>
 						<li class="nav-item"><a class="nav-link" href="">Gerente</a></li>
 						<li class="nav-item"><a class="nav-link" href="">Reporte</a></li>
 					</ul>
@@ -121,19 +121,30 @@
 	<!-- End header -->
     {% block body %}
     {% endblock %}
-      {% if messages %}
-        {% for mensaje in messages %}
-          {% if mensaje.tags == 'success' %}
-            <script>
-              Swal.fire({
-                title: "Confirmacion",
-                text: "{{mensaje}}",
-                icon: "success"
-              });
-            </script>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+    {% if messages %}
+      {% for mensaje in messages %}
+        {% if mensaje.tags == 'success' %}
+          <script>
+            Swal.fire({
+              title: "Confirmacion",
+              text: "{{mensaje}}",
+              icon: "success"
+            });
+          </script>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <style>
+        label.error {
+            /* Letras de color rojo */
+            color: red;
+        }
+        .form-control.error {
+            border: 4px solid red;
+        }
+    </style>
+
 
 
     <footer class="footer">

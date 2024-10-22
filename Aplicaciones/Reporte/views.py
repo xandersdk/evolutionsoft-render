@@ -113,9 +113,7 @@ def guardarEmpleado(request):
         direccion = request.POST["direccion"]
         telefono = request.POST["telefono"]
         email = request.POST["email"]
-        empresa_id = request.POST["empresa"]
-        empresa = Empresa.objects.get(id=empresa_id)
-
+        empresa_id = request.POST.get("empresa")  # Suponiendo que recibes el id de la empresa
 
         nuevoEmpleado = Empleado.objects.create(
             cedula=cedula,
@@ -125,34 +123,30 @@ def guardarEmpleado(request):
             direccion=direccion,
             telefono=telefono,
             email=email,
-            empresa=empresa,
-
+            empresa_id=empresa_id  # Guardar el ID de la empresa
         )
 
         messages.success(request, "Empleado registrado exitosamente")
         return redirect('listadoEmpleados')
 
-
-# Renderizando formulario de actualización de Empleado
+# Renderizando formulario de actualización de empleado
 def editarEmpleado(request, id):
     empleadoEditar = Empleado.objects.get(id=id)
     empresaBdd = Empresa.objects.all()
     return render(request, 'editarEmpleado.html', {'empleadoEditar': empleadoEditar,'empresa':empresaBdd})
 
-
-
 # Actualizando los nuevos datos en la base de datos
 def procesarActualizacionEmpleado(request):
     if request.method == 'POST':
         id_empleado = request.POST['id']
-        cedula = request.POST["cedula"]
-        apellido_paterno = request.POST["apellido_paterno"]
-        apellido_materno = request.POST["apellido_materno"]
-        nombres = request.POST["nombres"]
-        direccion = request.POST["direccion"]
-        telefono = request.POST["telefono"]
-        email = request.POST["email"]
-        empresa_id = request.POST["empresa"]
+        cedula = request.POST['cedula']
+        apellido_paterno = request.POST['apellido_paterno']
+        apellido_materno = request.POST['apellido_materno']
+        nombres = request.POST['nombres']
+        direccion = request.POST['direccion']
+        telefono = request.POST['telefono']
+        email = request.POST['email']
+        empresa_id = request.POST.get("empresa")  # Suponiendo que también recibes el id de la empresa
 
         try:
             empleadoConsultado = Empleado.objects.get(id=id_empleado)
@@ -163,11 +157,12 @@ def procesarActualizacionEmpleado(request):
             empleadoConsultado.direccion = direccion
             empleadoConsultado.telefono = telefono
             empleadoConsultado.email = email
-            empleadoConsultada.empresa_id = empresa_id
+            empleadoConsultado.empresa_id = empresa_id  # Actualizar la empresa
+
             empleadoConsultado.save()
 
             messages.success(request, 'Empleado actualizado con éxito')
         except Empleado.DoesNotExist:
-            messages.error(request, 'El Empleado no existe')
+            messages.error(request, 'El empleado no existe')
 
     return redirect('listadoEmpleados')
