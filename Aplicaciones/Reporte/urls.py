@@ -18,4 +18,5 @@ urlpatterns=[
     path('nuevoEmpleado/', views.nuevoEmpleado, name='nuevoEmpleado'),
     path('guardarEmpleado/', views.guardarEmpleado, name='guardarEmpleado'),
 
+
 ]

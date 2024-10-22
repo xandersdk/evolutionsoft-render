@@ -99,7 +99,7 @@ def eliminarEmpleado(request, id):
 # Renderizando formulario para nuevo empleado
 def nuevoEmpleado(request):
     empresaBdd = Empresa.objects.all()
-    return render(request, 'nuevoEmpleado.html', {'empresa':empresaBdd}))
+    return render(request, 'nuevoEmpleado.html', {'empresa':empresaBdd})
 
 
 # Insertando empleado en la base de datos
@@ -131,3 +131,43 @@ def guardarEmpleado(request):
 
         messages.success(request, "Empleado registrado exitosamente")
         return redirect('listadoEmpleados')
+
+
+# Renderizando formulario de actualización de Empleado
+def editarEmpleado(request, id):
+    empleadoEditar = Empleado.objects.get(id=id)
+    empresaBdd = Empresa.objects.all()
+    return render(request, 'editarEmpleado.html', {'empleadoEditar': empleadoEditar,'empresa':empresaBdd})
+
+
+
+# Actualizando los nuevos datos en la base de datos
+def procesarActualizacionEmpleado(request):
+    if request.method == 'POST':
+        id_empleado = request.POST['id']
+        cedula = request.POST["cedula"]
+        apellido_paterno = request.POST["apellido_paterno"]
+        apellido_materno = request.POST["apellido_materno"]
+        nombres = request.POST["nombres"]
+        direccion = request.POST["direccion"]
+        telefono = request.POST["telefono"]
+        email = request.POST["email"]
+        empresa_id = request.POST["empresa"]
+
+        try:
+            empleadoConsultado = Empleado.objects.get(id=id_empleado)
+            empleadoConsultado.cedula = cedula
+            empleadoConsultado.apellido_paterno = apellido_paterno
+            empleadoConsultado.apellido_materno = apellido_materno
+            empleadoConsultado.nombres = nombres
+            empleadoConsultado.direccion = direccion
+            empleadoConsultado.telefono = telefono
+            empleadoConsultado.email = email
+            empleadoConsultada.empresa_id = empresa_id
+            empleadoConsultado.save()
+
+            messages.success(request, 'Empleado actualizado con éxito')
+        except Empleado.DoesNotExist:
+            messages.error(request, 'El Empleado no existe')
+
+    return redirect('listadoEmpleados')
