@@ -21,6 +21,12 @@ urlpatterns=[
     path('procesarActualizacionEmpleado/', views.procesarActualizacionEmpleado, name='procesarActualizacionEmpleado'),
 
 
+    path('listadoEncargados/', views.listadoEncargado, name='listadoEncargados'),
+    path('eliminarEncargado/<id>/', views.eliminarEncargado, name='eliminarEncargado'),
+    path('nuevoEncargado/', views.nuevoEncargado, name='nuevoEncargado'),
+    path('guardarEncargado/', views.guardarEncargado, name='guardarEncargado'),
+    path('editarEncargado/<id>/', views.editarEncargado, name='editarEncargado'),
+    path('procesarActualizacionEncargado/', views.procesarActualizacionEncargado, name='procesarActualizacionEncargado'),
 
 
 ]

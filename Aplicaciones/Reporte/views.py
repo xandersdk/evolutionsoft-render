@@ -4,6 +4,8 @@ from django.core.files.storage import default_storage
 from django.db.models.deletion import ProtectedError
 from .models import Empresa
 from.models import Empleado
+from.models import Encargado
+
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -166,3 +168,90 @@ def procesarActualizacionEmpleado(request):
             messages.error(request, 'El empleado no existe')
 
     return redirect('listadoEmpleados')
+
+# Listado de encargados
+def listadoEncargado(request):
+    encargadosBdd = Encargado.objects.all()
+    empresasBdd = Empresa.objects.all()
+    return render(request, 'listadoEncargados.html', {'encargados': encargadosBdd, 'empresas': empresasBdd})
+
+
+# Eliminar encargado
+def eliminarEncargado(request, id):
+    encargadoEliminar = Encargado.objects.get(id=id)
+    encargadoEliminar.delete()
+    messages.success(request, "Encargado eliminado exitosamente")
+    return redirect('listadoEncargados')
+
+
+# Renderizando formulario para nuevo encargado
+def nuevoEncargado(request):
+    empresasBdd = Empresa.objects.all()
+    return render(request, 'nuevoEncargado.html', {'empresas': empresasBdd})
+
+
+# Insertando encargado en la base de datos
+def guardarEncargado(request):
+    if request.method == 'POST':
+        cedula = request.POST["cedula"]
+        apellido_paterno = request.POST["apellido_paterno"]
+        apellido_materno = request.POST["apellido_materno"]
+        nombres = request.POST["nombres"]
+        cargo = request.POST["cargo"]  # Nuevo campo "Cargo"
+        telefono = request.POST["telefono"]
+        email = request.POST["email"]
+        empresa_id = request.POST.get("empresa")  # Suponiendo que recibes el id de la empresa
+
+        nuevoEncargado = Encargado.objects.create(
+            cedula=cedula,
+            apellido_paterno=apellido_paterno,
+            apellido_materno=apellido_materno,
+            nombres=nombres,
+            cargo=cargo,  # Guardar el cargo del encargado
+            telefono=telefono,
+            email=email,
+            empresa_id=empresa_id
+        )
+
+        messages.success(request, "Encargado registrado exitosamente")
+        return redirect('listadoEncargados')
+
+
+# Renderizando formulario de actualización de encargado
+def editarEncargado(request, id):
+    encargadoEditar = Encargado.objects.get(id=id)
+    empresasBdd = Empresa.objects.all()
+    return render(request, 'editarEncargado.html', {'encargadoEditar': encargadoEditar, 'empresas': empresasBdd})
+
+
+# Actualizando los nuevos datos del encargado en la base de datos
+def procesarActualizacionEncargado(request):
+    if request.method == 'POST':
+        id_encargado = request.POST['id']
+        cedula = request.POST['cedula']
+        apellido_paterno = request.POST['apellido_paterno']
+        apellido_materno = request.POST['apellido_materno']
+        nombres = request.POST['nombres']
+        cargo = request.POST['cargo']  # Actualizar el campo "Cargo"
+        telefono = request.POST['telefono']
+        email = request.POST['email']
+        empresa_id = request.POST.get("empresa")  # Suponiendo que también recibes el id de la empresa
+
+        try:
+            encargadoConsultado = Encargado.objects.get(id=id_encargado)
+            encargadoConsultado.cedula = cedula
+            encargadoConsultado.apellido_paterno = apellido_paterno
+            encargadoConsultado.apellido_materno = apellido_materno
+            encargadoConsultado.nombres = nombres
+            encargadoConsultado.cargo = cargo  # Actualizar el cargo del encargado
+            encargadoConsultado.telefono = telefono
+            encargadoConsultado.email = email
+            encargadoConsultado.empresa_id = empresa_id  # Actualizar la empresa
+
+            encargadoConsultado.save()
+
+            messages.success(request, 'Encargado actualizado con éxito')
+        except Encargado.DoesNotExist:
+            messages.error(request, 'El encargado no existe')
+
+    return redirect('listadoEncargados')

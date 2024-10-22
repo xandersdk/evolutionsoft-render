@@ -1,14 +1,15 @@
 {% extends "./plantilla.html" %}
 {% block body %}
 
-<div class="container-fluid mt-12">
+<div class="container-fluid mt-3">
   <div class="card-title text-center">
     <h3><b>Listado de Encargados</b></h3>
   </div>
 </div>
+
 <div class="container">
   <div class="d-flex justify-content-end mb-4">
-    <a href="{% url 'nuevoEncargado' %}" class="btn btn-primary">Agregar Nuevo</a>
+    <a href="{% url 'nuevoEncargado' %}" class="btn btn-primary">Agregar Nuevo Encargado</a>
   </div>
 </div>
 
@@ -41,12 +42,11 @@
           <td>{{ encargado.telefono }}</td>
           <td>{{ encargado.email }}</td>
           <td>{{ encargado.empresa.nombre }}</td>
-
           <td>
             <a href="{% url 'editarEncargado' encargado.id %}" class="btn btn-warning">
               <i class="fas fa-edit"></i>
             </a>
-            <a href="{% url 'eliminarEncargado' encargado.id %}" onclick="return confirm('¿Estás seguro?')" class="btn btn-danger">
+            <a href="javascript:void(0)" onclick="confirmarEliminarEncargado('/eliminarEncargado/{{ encargado.id }}');" class="btn btn-danger">
               <i class="fas fa-trash-alt"></i>
             </a>
           </td>
@@ -72,6 +72,40 @@
       'csv'
     ]
   });
+
+  function confirmarEliminarEncargado(url) {
+    iziToast.question({
+      timeout: 20000,
+      close: true,
+      overlay: true,
+      displayMode: 'once',
+      id: 'question',
+      zindex: 999,
+      title: 'Confirmación',
+      message: '¿Está seguro de eliminar el encargado seleccionado?',
+      position: 'topRight',
+      buttons: [
+        ['<button><b>SI</b></button>', function (instance, toast) {
+          instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+          window.location.href = url;
+        }, true],
+        ['<button>NO</button>', function (instance, toast) {
+          instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+        }]
+      ]
+    });
+  }
 </script>
+
+<style>
+  .table th.tablecolor {
+    background-color: #76d7c4 !important;
+    font-size: 1.5rem;
+  }
+
+  .table td, .table th {
+    font-size: 1.2rem;
+  }
+</style>
 
 {% endblock %}
