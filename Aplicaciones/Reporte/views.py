@@ -91,3 +91,35 @@ def eliminarEmpleado(request, id):
     empleadoEliminar.delete()
     messages.success(request, "Empleado eliminado exitosamente")
     return redirect('listadoEmpleados')
+
+
+# Renderizando formulario para nuevo empleado
+def nuevoEmpleado(request):
+    return render(request, 'nuevoEmpleado.html')
+
+# Insertando empleado en la base de datos
+
+def guardarEmpleado(request):
+    if request.method == 'POST':
+        cedula = request.POST["cedula"]
+        apellido_paterno = request.POST["apellido_paterno"]
+        apellido_materno = request.POST["apellido_materno"]
+        nombres = request.POST["nombres"]
+        direccion = request.POST["direccion"]
+        telefono = request.POST["telefono"]
+        email = request.POST["email"]
+
+
+        nuevoEmpleado = Empleado.objects.create(
+            cedula=cedula,
+            apellido_paterno=apellido_paterno,
+            apellido_materno=apellido_materno,
+            nombres=nombres,
+            direccion=direccion,
+            telefono=telefono,
+            email=email,
+
+        )
+
+        messages.success(request, "Empleado registrado exitosamente")
+        return redirect('listadoEmpleados')
