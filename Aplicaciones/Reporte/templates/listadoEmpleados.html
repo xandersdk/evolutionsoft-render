@@ -26,6 +26,7 @@
           <th class="tablecolor">Dirección</th>
           <th class="tablecolor">Teléfono</th>
           <th class="tablecolor">Email</th>
+          <th class="tablecolor">Empresa</th>
           <th class="tablecolor">Acciones</th>
         </tr>
       </thead>
@@ -40,6 +41,7 @@
           <td>{{ empleado.direccion }}</td>
           <td>{{ empleado.telefono }}</td>
           <td>{{ empleado.email }}</td>
+          <td>{{ empleado.empresa.nombre }}</td>
 
           <td>
             <a href="{% url 'editarEmpleado' empleado.id %}" class="btn btn-warning">

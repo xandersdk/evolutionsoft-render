@@ -82,7 +82,8 @@ def procesarActualizacionEmpresa(request):
 # Renderizando el template de listado de empleados
 def listadoEmpleado(request):
     empleadosBdd = Empleado.objects.all()
-    return render(request, 'listadoEmpleados.html', {'empleados': empleadosBdd})
+    empresaBdd = Empresa.objects.all()
+    return render(request, 'listadoEmpleados.html', {'empleados': empleadosBdd, 'empresa':empresaBdd})
 
 
 # Eliminar empleado
@@ -93,9 +94,13 @@ def eliminarEmpleado(request, id):
     return redirect('listadoEmpleados')
 
 
+
+
 # Renderizando formulario para nuevo empleado
 def nuevoEmpleado(request):
-    return render(request, 'nuevoEmpleado.html')
+    empresaBdd = Empresa.objects.all()
+    return render(request, 'nuevoEmpleado.html', {'empresa':empresaBdd}))
+
 
 # Insertando empleado en la base de datos
 
@@ -108,6 +113,8 @@ def guardarEmpleado(request):
         direccion = request.POST["direccion"]
         telefono = request.POST["telefono"]
         email = request.POST["email"]
+        empresa_id = request.POST["empresa"]
+        empresa = Empresa.objects.get(id=empresa_id)
 
 
         nuevoEmpleado = Empleado.objects.create(
@@ -118,6 +125,7 @@ def guardarEmpleado(request):
             direccion=direccion,
             telefono=telefono,
             email=email,
+            empresa=empresa,
 
         )
 
