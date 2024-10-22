@@ -1,0 +1,160 @@
+{% extends "./plantilla.html" %}
+{% block body %}
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card fluid-border shadow-sm">
+        <br>
+        <div class="card-header text-center" style="background-color: #B1D690; color: #000000;">
+          <h4><b>Editar Encargado</b></h4>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'procesarActualizacionEncargado' %}" enctype="multipart/form-data" id="frm_editar_encargado" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ encargadoEditar.id }}">
+
+            <div class="form-group mb-3">
+              <label for="cedula"><b>Cédula:</b></label>
+              <input type="text" name="cedula" id="cedula" class="form-control" value="{{ encargadoEditar.cedula }}" placeholder="Ingrese la cédula del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="apellido_paterno"><b>Apellido Paterno:</b></label>
+              <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control" value="{{ encargadoEditar.apellido_paterno }}" placeholder="Ingrese el apellido paterno del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="apellido_materno"><b>Apellido Materno:</b></label>
+              <input type="text" name="apellido_materno" id="apellido_materno" class="form-control" value="{{ encargadoEditar.apellido_materno }}" placeholder="Ingrese el apellido materno del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="nombres"><b>Nombres:</b></label>
+              <input type="text" name="nombres" id="nombres" class="form-control" value="{{ encargadoEditar.nombres }}" placeholder="Ingrese los nombres del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="cargo"><b>Cargo:</b></label>
+              <input type="text" name="cargo" id="cargo" class="form-control" value="{{ encargadoEditar.cargo }}" placeholder="Ingrese el cargo del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="telefono"><b>Teléfono:</b></label>
+              <input type="text" name="telefono" id="telefono" class="form-control" value="{{ encargadoEditar.telefono }}" placeholder="Ingrese el teléfono del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="email"><b>Email:</b></label>
+              <input type="email" name="email" id="email" class="form-control" value="{{ encargadoEditar.email }}" placeholder="Ingrese el email del encargado" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="empresa"><b>Empresa:</b></label>
+              <select name="empresa" id="empresa" class="form-control">
+                <option value="">--Seleccione una empresa--</option>
+                {% for empresa in empresas %}
+                <option value="{{ empresa.id }}" {% if empresa.id == encargadoEditar.empresa.id %}selected{% endif %}>{{ empresa.nombre }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-success">Actualizar</button>
+              <a href="{% url 'listadoEncargados' %}" class="btn btn-primary ms-2">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+
+<script>
+    $("#frm_editar_encargado").validate({
+        rules: {
+            cedula: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
+            },
+            apellido_paterno: {
+                required: true,
+                lettersonly: true,
+                minlength: 2
+            },
+            apellido_materno: {
+                required: true,
+                lettersonly: true,
+                minlength: 2
+            },
+            nombres: {
+                required: true,
+                lettersonly: true,
+                minlength: 2
+            },
+            cargo: {
+                required: true,
+            },
+            telefono: {
+              required: true,
+              digits: true,
+              minlength: 10,
+              maxlength: 10
+            },
+            email: {
+                required: true,
+                email: true,
+            },
+            empresa: {
+                  required: true
+            }
+        },
+        messages: {
+            cedula: {
+                required: "Por favor ingrese la cédula del encargado",
+                digits: "Solo se permiten números",
+                minlength: "La cédula debe tener exactamente 10 dígitos",
+                maxlength: "La cédula debe tener exactamente 10 dígitos"
+            },
+            apellido_paterno: {
+                required: "Por favor ingrese el apellido paterno del encargado",
+                lettersonly: "Solo se permite letras",
+                minlength: "El apellido debe tener al menos 2 letras",
+            },
+            apellido_materno: {
+                required: "Por favor ingrese el apellido materno del encargado",
+                lettersonly: "Solo se permite letras",
+                minlength: "El apellido debe tener al menos 2 letras",
+            },
+            nombres: {
+                required: "Por favor ingrese los nombres del encargado",
+                lettersonly: "Solo se permite letras",
+                minlength: "El nombre debe tener al menos 2 letras",
+            },
+            cargo: {
+                required: "Por favor ingrese el cargo del encargado",
+            },
+            telefono: {
+              required: "Por favor ingrese el teléfono del encargado",
+              digits: "Solo se permiten números",
+              minlength: "El telefono debe tener exactamente 10 dígitos",
+              maxlength: "El telefono debe tener exactamente 10 dígitos",
+            },
+            email: {
+                required: "Por favor ingrese el email del encargado",
+                email: "Ingrese un email válido",
+            },
+            empresa: {
+                required: "Seleccione una empresa"
+            }
+        }
+    });
+
+    // Custom validation methods
+    $.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+    }, "Solo se permite letras");
+</script>
+
+{% endblock %}
