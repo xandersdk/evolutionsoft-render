@@ -22,8 +22,8 @@
       <thead>
         <tr>
           <th class="tablecolor">ID</th>
-          <th class="tablecolor">Empleado</th>
           <th class="tablecolor">Encargado</th>
+          <th class="tablecolor">Empleado</th>          
           <th class="tablecolor">Acciones</th>
         </tr>
 
@@ -32,10 +32,9 @@
         {% for certificado in certificados %}
         <tr>
           <td>{{ certificado.id }}</td>
-          <td>{{ certificado.empleados.apellido_paterno }} {{ certificado.empleados.apellido_materno }} {{ certificado.empleados.nombres }}</td>
-
-          <td>{{ certificado.encargados.nombre }}</td>          
-          
+          <td>{{ certificado.encargado.apellido_paterno }}  {{ certificado.encargado.apellido_materno }}  {{ certificado.encargado.nombres }}</td>          
+          <td>{{ certificado.empleado.apellido_paterno }} {{ certificado.empleado.apellido_materno }} {{ certificado.empleado.nombres }}</td>
+       
           <td>
             <a href="/editarEmpresa/{{ empresa.id }}" class="btn btn-warning">Editar</a>
             <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">Eliminar</a>

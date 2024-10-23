@@ -8,7 +8,7 @@
         <h4><b>Agregar Nuevo Encargado</b></h4>
       </div>
       <div class="card-body">
-        <form action="{% url 'guardarEncargado' %}" enctype="multipart/form-data" id="frm_nuevo_encargado" method="post">
+        <form action="{% url 'guardarCertificado' %}" enctype="multipart/form-data" id="frm_nuevo_encargado" method="post">
           {% csrf_token %}      
                  
           <div class="form-group mb-3">

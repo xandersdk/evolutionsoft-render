@@ -269,3 +269,21 @@ def nuevoCertificado(request):
     encargadosBdd = Encargado.objects.all()
     empleadosBdd = Empleado.objects.all()
     return render(request, 'nuevocertificado.html', {'encargados': encargadosBdd, 'empleados': empleadosBdd})
+
+
+def guardarCertificado(request):
+    if request.method == 'POST':
+        encargado_id = request.POST.get("encargado")  # Sin la coma
+        empleado_id = request.POST.get("empleado")
+
+        # Asegúrate de que estás pasando IDs válidos como enteros
+        nuevoCertificado = Certificado.objects.create(
+            encargado_id=int(encargado_id),
+            empleado_id=int(empleado_id)
+        )
+
+        messages.success(request, "Certificado registrado exitosamente")
+        return redirect('listadoCertificado')
+
+    # Otras acciones en caso de que no sea POST
+    return render(request, 'formulario_certificado.html')

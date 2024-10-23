@@ -31,4 +31,5 @@ urlpatterns=[
 #-----------------------------------------------------------------------------------------------------------------
     path('listadoCertificado/', views.listadoCertificado, name='listadoCertificado'),
     path('nuevoCertificado/', views.nuevoCertificado, name='nuevoCertificado'),
+    path('guardarCertificado/', views.guardarCertificado, name='guardarCertificado'),
 ]
