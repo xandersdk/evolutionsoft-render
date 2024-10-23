@@ -5,7 +5,7 @@ from django.db.models.deletion import ProtectedError
 from .models import Empresa
 from.models import Empleado
 from.models import Encargado
-
+from.models import Certificado
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -168,7 +168,7 @@ def procesarActualizacionEmpleado(request):
             messages.error(request, 'El empleado no existe')
 
     return redirect('listadoEmpleados')
-
+#-------------------------Encargado------------------------------------------------------------------------------------------
 # Listado de encargados
 def listadoEncargado(request):
     encargadosBdd = Encargado.objects.all()
@@ -255,3 +255,10 @@ def procesarActualizacionEncargado(request):
             messages.error(request, 'El encargado no existe')
 
     return redirect('listadoEncargados')
+
+#-------------------------Certificado------------------------------------------------------------------------------------------
+def listadoCertificado(request):
+    certificadosBdd = Certificado.objects.all()
+    encargadosBdd = Encargado.objects.all()
+    empleadosBdd = Empleado.objects.all()
+    return render(request, 'listadocertificado.html', {'certificados':certificadosBdd,'encargados': encargadosBdd, 'empleados': empleadosBdd})
