@@ -1,0 +1,77 @@
+{% extends "./plantilla.html" %}
+{% block body %}
+
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card border-2">
+      <div class="card-header text-center" style="background-color: #B1D690; color: #000000;">
+        <h4><b>Agregar Nuevo Encargado</b></h4>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'guardarEncargado' %}" enctype="multipart/form-data" id="frm_nuevo_encargado" method="post">
+          {% csrf_token %}      
+                 
+          <div class="form-group mb-3">
+              <label for="encargado"><b>Encargado</b></label>
+              <select name="encargado" id="encargado" class="form-control">
+                  <option value="" selected>-- Seleccione del Encargado --</option>
+                  {% for encargado in encargados %}
+                      <option value="{{ encargado.id }}">{{ encargado.apellido_paterno }}  {{ encargado.apellido_materno }}  {{ encargado.nombres }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="empleado"><b>Empleado</b></label>
+            <select name="empleado" id="empleado" class="form-control">
+                <option value="" selected>-- Seleccione el Empleado --</option>
+                {% for empleado in empleados %}
+                    <option value="{{ empleado.id }}">{{ empleado.apellido_paterno }}  {{ empleado.apellido_materno }}  {{ empleado.nombres }}</option>
+                {% endfor %}
+            </select>
+        </div>
+          <br>
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger">Guardar</button>
+            <a href="{% url 'listadoCertificado' %}" class="btn btn-primary ms-2">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Incluir jQuery y jQuery Validation -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/additional-methods.min.js"></script>
+
+<script>
+  // Método para validar solo letras
+  $.validator.addMethod("lettersonly", function(value, element) {
+      return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+  }, "Solo se permiten letras");
+
+  // Validación del formulario
+  $("#frm_nuevo_encargado").validate({
+      rules: {
+                 
+          
+          encargado: {
+              required: true
+          },
+          empleado: {
+              required: true
+          }
+      },
+      messages: {                
+          encargado: {
+              required: "Por favor seleccione el encargado",
+          },
+          empleado: {
+              required: "Por favor seleccione el empleado"
+          }
+      }
+  });
+</script>
+
+{% endblock %}

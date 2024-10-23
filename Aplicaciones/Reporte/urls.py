@@ -29,5 +29,6 @@ urlpatterns=[
     path('procesarActualizacionEncargado/', views.procesarActualizacionEncargado, name='procesarActualizacionEncargado'),
 
 #-----------------------------------------------------------------------------------------------------------------
-     path('listadoCertificado/', views.listadoCertificado, name='listadoCertificado'),
+    path('listadoCertificado/', views.listadoCertificado, name='listadoCertificado'),
+    path('nuevoCertificado/', views.nuevoCertificado, name='nuevoCertificado'),
 ]

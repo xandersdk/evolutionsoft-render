@@ -262,3 +262,10 @@ def listadoCertificado(request):
     encargadosBdd = Encargado.objects.all()
     empleadosBdd = Empleado.objects.all()
     return render(request, 'listadocertificado.html', {'certificados':certificadosBdd,'encargados': encargadosBdd, 'empleados': empleadosBdd})
+
+
+# Renderizando formulario para nuevo encargado
+def nuevoCertificado(request):
+    encargadosBdd = Encargado.objects.all()
+    empleadosBdd = Empleado.objects.all()
+    return render(request, 'nuevocertificado.html', {'encargados': encargadosBdd, 'empleados': empleadosBdd})
