@@ -17,6 +17,7 @@ class Usuario(models.Model):
     username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)  # Se recomienda almacenar contraseñas cifradas
 
+
     def __str__(self):
             fila="{0}:{1} {2}"
             return fila.format(self.id,self.username,self.password)
@@ -57,3 +58,4 @@ class Certificado(models.Model):
      id = models.AutoField(primary_key=True)
      empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE,null=True, blank=True)
      encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE,null=True, blank=True)
+     fecha_creacion = models.DateField(null=True, blank=True)
