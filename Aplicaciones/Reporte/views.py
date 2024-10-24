@@ -2,10 +2,7 @@ from django.shortcuts import render,redirect
 from datetime import datetime
 from django.core.files.storage import default_storage
 from django.db.models.deletion import ProtectedError
-from .models import Empresa
-from.models import Empleado
-from.models import Encargado
-from.models import Certificado
+from .models import Empresa, Empleado, Encargado,Certificado
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from reportlab.lib.pagesizes import letter
