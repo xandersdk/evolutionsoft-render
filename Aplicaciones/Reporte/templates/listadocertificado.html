@@ -1,11 +1,9 @@
 {% extends "./plantilla.html" %}
 {% block body %}
 
-
 <div class="container-fluid mt-3">
   <div class="card-title text-center">
     <h3 class="custom-title font-weight-bold text-black"><b>Listado de Certificados</b></h3>
-
   </div>
 </div>
 
@@ -15,7 +13,6 @@
   </div>
 </div>
 
-
 <div class="container">
   <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover" id="tbl-clientes">
@@ -23,21 +20,22 @@
         <tr>
           <th class="tablecolor">ID</th>
           <th class="tablecolor">Encargado</th>
-          <th class="tablecolor">Empleado</th>          
+          <th class="tablecolor">Empleado</th>
           <th class="tablecolor">Acciones</th>
         </tr>
-
       </thead>
       <tbody>
         {% for certificado in certificados %}
         <tr>
           <td>{{ certificado.id }}</td>
-          <td>{{ certificado.encargado.apellido_paterno }}  {{ certificado.encargado.apellido_materno }}  {{ certificado.encargado.nombres }}</td>          
+          <td>{{ certificado.encargado.apellido_paterno }} {{ certificado.encargado.apellido_materno }} {{ certificado.encargado.nombres }}</td>
           <td>{{ certificado.empleado.apellido_paterno }} {{ certificado.empleado.apellido_materno }} {{ certificado.empleado.nombres }}</td>
-       
           <td>
-            <a href="/editarCertificado/{{ certificado.id }}" class="btn btn-warning">Editar</a>
-            <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">Eliminar</a>
+            <a href="/editarCertificado/{{ certificado.id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+            <a href="javascript:void(0)" onclick="eliminarCertificado('/eliminarCertificado/{{ certificado.id }}');" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            <a href="{% url 'generar_certificado' certificado.id %}" class="btn btn-success" target="_blank">
+              <i class="fas fa-print"></i>
+            </a>
           </td>
         </tr>
         {% endfor %}
@@ -45,30 +43,32 @@
     </table>
   </div>
 </div>
+
 <script type="text/javascript">
-  function eliminarEmpresa(url){
-      iziToast.question({
-          timeout: 15000,
-          close: true,
-          overlay: true,
-          displayMode: 'once',
-          id: 'question',
-          zindex: 999,
-          title: 'CONFIRMACIÓN',
-          message: '¿Está seguro de eliminar la empresa seleccionado?',
-          position: 'topRight',
-          buttons: [
-              ['<button><b>SI</b></button>', function (instance, toast) {
-                  instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-                  window.location.href=url;
-              }, true],
-              ['<button>NO</button>', function (instance, toast) {
-                  instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-              }],
-          ]
-      });
+  function eliminarCertificado(url) {
+    iziToast.question({
+      timeout: 15000,
+      close: true,
+      overlay: true,
+      displayMode: 'once',
+      id: 'question',
+      zindex: 999,
+      title: 'CONFIRMACIÓN',
+      message: '¿Está seguro de eliminar la empresa seleccionada?',
+      position: 'topRight',
+      buttons: [
+        ['<button><b>SI</b></button>', function (instance, toast) {
+          instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+          window.location.href = url;
+        }, true],
+        ['<button>NO</button>', function (instance, toast) {
+          instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+        }],
+      ]
+    });
   }
 </script>
+
 <script type="text/javascript">
   $('#tbl-clientes').DataTable({
     "language": {
@@ -86,23 +86,22 @@
   });
 </script>
 
-<!-- Incluir jQuery y Bootstrap JS -->
+<!-- Incluir jQuery, Bootstrap JS y Font Awesome -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
-
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <style>
   .table td, .table th {
-    font-size: 1.2rem; /* Ajusta el tamaño del texto en las celdas   */
+    font-size: 1.2rem; /* Ajusta el tamaño del texto en las celdas */
   }
 
   .table th.tablecolor {
     background-color: #76d7c4 !important;
     color: dark !important;
-    font-size: 1.5rem; /* white Ajusta el tamaño del texto en las cabeceras */
+    font-size: 1.5rem; /* Ajusta el tamaño del texto en las cabeceras */
   }
-
 
   .table-responsive {
     margin: auto;

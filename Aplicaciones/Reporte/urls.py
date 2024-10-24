@@ -34,5 +34,7 @@ urlpatterns=[
     path('guardarCertificado/', views.guardarCertificado, name='guardarCertificado'),
     path('editarCertificado/<id>/', views.editarCertificado, name='editarCertificado'),
     path('procesarActualizacionCertificado/', views.procesarActualizacionCertificado, name='procesarActualizacionCertificado'),
+    path('eliminarCertificado/<id>/', views.eliminarCertificado, name='eliminarCertificado'),
+    path('certificado/<int:certificado_id>/', views.generar_certificado, name='generar_certificado'),
 
 ]
