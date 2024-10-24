@@ -371,7 +371,7 @@ def generar_certificado(request, certificado_id):
 
     # Configurar la respuesta HTTP para el PDF
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="certificado_{certificado.id}.pdf"'
+    response['Content-Disposition'] = f'inline; filename="certificado_{certificado.id}.pdf"'
 
     # Crear el canvas para el PDF con tamaño carta
     p = canvas.Canvas(response, pagesize=letter)
@@ -380,6 +380,7 @@ def generar_certificado(request, certificado_id):
     # Obtener datos del empleado y encargado
     empleado = certificado.empleado
     encargado = certificado.encargado
+
     # Establecer la localización a español
     locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
@@ -400,7 +401,7 @@ def generar_certificado(request, certificado_id):
     text_desc.textLine("                                TECNOLÓGICA")
     p.drawText(text_desc)
 
-   # Agregar el título del certificado en negrita y subrayado
+    # Agregar el título del certificado en negrita y subrayado
     titulo = "CERTIFICADO DE HONORABILIDAD"
     p.setFont("Helvetica-Bold", 14)  # Aumentar ligeramente la fuente para énfasis
     x_titulo = 200
@@ -413,20 +414,17 @@ def generar_certificado(request, certificado_id):
     # Configuración del contenido del certificado (centrado debajo del logo y la descripción)
     p.setFont("Helvetica", 12)
     text = p.beginText(100, 580)
-    # Asegúrate de establecer el idioma para los nombres de los meses en español
-    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
     # Formatear la fecha al formato deseado
     fecha_formateada = certificado.fecha_creacion.strftime('%d de %B de %Y')
 
-    # Ahora úsalo en la línea de texto
     text.textLine(f"Quito, {fecha_formateada}")
+
     # Convertir nombres y apellidos del encargado a mayúsculas
     encargado_nombre_completo = f"{encargado.nombres.upper()} {encargado.apellido_paterno.upper()} {encargado.apellido_materno.upper()}"
     text.textLine("")
     text.textLine(
         f"Yo, {encargado_nombre_completo}, director de tecnologías de {encargado.empresa.nombre},"
-        
     )
     text.textLine(f"con RUC {encargado.empresa.ruc}, a quien corresponda y a petición verbal de la interesada:")
     text.textLine("")
@@ -436,29 +434,24 @@ def generar_certificado(request, certificado_id):
 
     text.textLine(f" A {empleado_nombre_completo},con cédula de ciudadanía {empleado.cedula}, por un lapso")
     text.textLine(" de 5 años tiempo en el cual ha demostrado ser una persona respetuosa, seria, responsable,")
-    text.textLine("trabajadora y honrada, la cual se ha ganado mi aprecio y consideración.")  
+    text.textLine("trabajadora y honrada, la cual se ha ganado mi aprecio y consideración.")
     text.textLine("")
     text.textLine("Es todo lo que puedo decir en honor a la verdad, facultándole a la interesada el uso del")
     text.textLine("presente certificado como lo creyere conveniente.")
     text.textLine("")
-    text.textLine("")
-  
     text.textLine("Atentamente,")
     text.textLine("")
     text.textLine("--------------------------------------------------")
-    
 
- 
-    
     text.textLine(f"{encargado.nombres} {encargado.apellido_paterno} {encargado.apellido_materno}")
     text.textLine(f"{encargado.cargo}")
     text.textLine(f"Cédula: {encargado.cedula}")
     text.textLine(f"Celular: {encargado.telefono}")
     text.textLine(f"Email: {encargado.email}")
+
     # Logo de la empresa
-    logo_path = os.path.join(settings.STATICFILES_DIRS[0], 'images/logo1.jpeg')  # Asegúrate de que la imagen esté en 'static/images'
+    logo_path = os.path.join(settings.STATICFILES_DIRS[0], 'images/logo1.jpeg')
     p.drawImage(logo_path, 400, 320, width=150, height=100, preserveAspectRatio=True)
-    
 
     # Agregar el texto al PDF
     p.drawText(text)
