@@ -18,7 +18,7 @@ class Usuario(models.Model):
     password = models.CharField(max_length=128)  # Se recomienda almacenar contraseñas cifradas
 
     def __str__(self):
-            fila="{0}:{1} {2} {3}"
+            fila="{0}:{1} {2}"
             return fila.format(self.id,self.username,self.password)
 
 class Empleado(models.Model):
