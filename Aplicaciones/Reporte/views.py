@@ -286,4 +286,40 @@ def guardarCertificado(request):
         return redirect('listadoCertificado')
 
     # Otras acciones en caso de que no sea POST
-    return render(request, 'formulario_certificado.html')
+    return render(request, 'listadocertificado.html')
+
+# Renderizando formulario de actualización de encargado
+def editarCertificado(request, id): 
+    certificadoEditar = Certificado.objects.get(id=id)
+    encargadosBdd = Encargado.objects.all()
+    empleadosBdd = Empleado.objects.all()    
+    return render(request, 'editarcertificado.html', {'certificadoEditar': certificadoEditar, 'encargados': encargadosBdd, 'empleados': empleadosBdd})  
+
+
+def procesarActualizacionCertificado(request):
+    if request.method == 'POST':
+        id_certificado = request.POST['id']
+        encargado_id = request.POST.get("encargado")
+        empleado_id = request.POST.get("empleado")
+
+        try:
+            # Obtener el certificado que se va a actualizar
+            certificadoConsultado = Certificado.objects.get(id=id_certificado)
+
+            # Actualizar los campos correctamente (sin coma)
+            certificadoConsultado.encargado_id = int(encargado_id)
+            certificadoConsultado.empleado_id = int(empleado_id)
+
+            # Guardar los cambios
+            certificadoConsultado.save()
+
+            # Mensaje de éxito
+            messages.success(request, 'Certificado actualizado con éxito')
+        except Certificado.DoesNotExist:
+            messages.error(request, 'El certificado no existe')
+
+    return redirect('listadoCertificado')
+
+
+    
+
