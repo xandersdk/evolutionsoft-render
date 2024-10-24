@@ -79,7 +79,7 @@ def procesarActualizacionEmpresa(request):
 
             empresaConsultado.save()
 
-            messages.success(request, 'Cliente actualizado con éxito')
+            messages.success(request, 'Empresa actualizado con éxito')
         except Empresa.DoesNotExist:
             messages.error(request, 'El Cliente no existe')
 
