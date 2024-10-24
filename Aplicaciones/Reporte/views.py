@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from datetime import datetime
 from django.core.files.storage import default_storage
 from django.db.models.deletion import ProtectedError
-from .models import Empresa, Empleado, Encargado,Certificado
+from .models import Empresa, Empleado, Encargado,Certificado,Usuario
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from reportlab.lib.pagesizes import letter
@@ -11,13 +11,40 @@ from reportlab.pdfgen import canvas
 from datetime import datetime
 from django.conf import settings
 import os
+from django.contrib.auth import authenticate, login
 import locale
 
 
 # Create your views here.
 # Create your views here.
 def home(request):
-    return render(request, "home.html")
+    user_id = request.session.get('user_id')
+    if user_id:
+        user = Usuario.objects.get(id=user_id)
+        return render(request, 'home.html', {'user': user})
+    else:
+        return redirect('login')  #
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            user = Usuario.objects.get(username=username)
+            if user.password == password:
+                # Aquí puedes establecer la sesión del usuario
+                request.session['user_id'] = user.id
+                messages.success(request, "Inicio de sesión exitoso")
+                return redirect('home')  # Redirige a una página principal o dashboard
+            else:
+                messages.error(request, "Contraseña incorrecta")
+        except Usuario.DoesNotExist:
+            messages.error(request, "Usuario no encontrado")
+
+    return render(request, 'login.html')  # Renderiza tu plantilla de login
+
+
 
 # Insertando una nueva empresa en la base de datos
 def guardarEmpresa(request):
