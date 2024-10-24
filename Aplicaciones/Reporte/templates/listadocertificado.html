@@ -28,7 +28,7 @@
         {% for certificado in certificados %}
         <tr>
           <td>{{ certificado.id }}</td>
-<<<<<<< HEAD
+
           <td>{{ certificado.encargado.apellido_paterno }} {{ certificado.encargado.apellido_materno }} {{ certificado.encargado.nombres }}</td>
           <td>{{ certificado.empleado.apellido_paterno }} {{ certificado.empleado.apellido_materno }} {{ certificado.empleado.nombres }}</td>
           <td>
@@ -36,20 +36,9 @@
             <a href="javascript:void(0)" onclick="eliminarCertificado('/eliminarCertificado/{{ certificado.id }}');" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
             <a href="{% url 'generar_certificado' certificado.id %}" class="btn btn-success" target="_blank">
               <i class="fas fa-print"></i>
-=======
-          <td>{{ certificado.encargado.apellido_paterno }}  {{ certificado.encargado.apellido_materno }}  {{ certificado.encargado.nombres }}</td>
-          <td>{{ certificado.empleado.apellido_paterno }} {{ certificado.empleado.apellido_materno }} {{ certificado.empleado.nombres }}</td>
 
-          <td>
-            <a href="/editarCertificado/{{ certificado.id }}" class="btn btn-warning">
-              <i class="fas fa-edit"></i>
-            </a>
 
-            <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">
-              <i class="fas fa-trash-alt"></i>
->>>>>>> b45ca68d3dda1b5a9d141549d8b2d19b12d754be
-            </a>
-          </td>
+         
         </tr>
         {% endfor %}
       </tbody>

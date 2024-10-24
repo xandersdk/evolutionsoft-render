@@ -1,21 +1,15 @@
 {% extends "./plantilla.html" %}
 {% block body %}
-
-
 <div class="container-fluid mt-3">
   <div class="card-title text-center">
     <h3 class="custom-title font-weight-bold text-black"><b>Listado de Empresas</b></h3>
-
   </div>
 </div>
-
 <div class="container">
   <div class="d-flex justify-content-end mb-4">
     <a href="{% url 'nuevaEmpresa' %}" class="btn btn-primary">Agregar Nuevo</a>
   </div>
 </div>
-
-
 <div class="container">
   <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover" id="tbl-clientes">
@@ -28,7 +22,6 @@
           <th class="tablecolor">Logo</th>
           <th class="tablecolor">Acciones</th>
         </tr>
-
       </thead>
       <tbody>
         {% for empresa in empresas %}
@@ -45,19 +38,8 @@
             {% endif %}
           </td>
           <td>
-<<<<<<< HEAD
             <a href="/editarEmpresa/{{ empresa.id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
             <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-=======
-            <a href="/editarEmpresa/{{ empresa.id }}" class="btn btn-warning">
-              <i class="fas fa-edit"></i>
-            </a>
-
-            <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">
-              <i class="fas fa-trash-alt"></i>
-            </a>
-
->>>>>>> b45ca68d3dda1b5a9d141549d8b2d19b12d754be
           </td>
         </tr>
         {% endfor %}

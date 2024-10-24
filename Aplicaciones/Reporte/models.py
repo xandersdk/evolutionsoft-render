@@ -12,6 +12,14 @@ class Empresa(models.Model):
             fila="{0}:{1} {2} {3}"
             return fila.format(self.id,self.ruc,self.nombre,self.descripcion)
 
+class Usuario(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=150, unique=True)
+    password = models.CharField(max_length=128)  # Se recomienda almacenar contraseñas cifradas
+
+    def __str__(self):
+            fila="{0}:{1} {2} {3}"
+            return fila.format(self.id,self.username,self.password)
 
 class Empleado(models.Model):
     id = models.AutoField(primary_key=True)
