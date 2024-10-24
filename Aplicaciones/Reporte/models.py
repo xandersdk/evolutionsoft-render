@@ -55,7 +55,7 @@ class Encargado(models.Model):
 
 
 class Certificado(models.Model):
-     id = models.AutoField(primary_key=True)
-     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE,null=True, blank=True)
-     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE,null=True, blank=True)
-     fecha_creacion = models.DateField(null=True, blank=True)
+    id = models.AutoField(primary_key=True)
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE,null=True, blank=True)
+    encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE,null=True, blank=True)
+    fecha_creacion = models.DateField(null=True, blank=True)

@@ -21,6 +21,7 @@
           <th class="tablecolor">ID</th>
           <th class="tablecolor">Encargado</th>
           <th class="tablecolor">Empleado</th>
+          <th class="tablecolor">Fecha</th> <!-- Columna de la fecha -->
           <th class="tablecolor">Acciones</th>
         </tr>
       </thead>
@@ -28,17 +29,16 @@
         {% for certificado in certificados %}
         <tr>
           <td>{{ certificado.id }}</td>
-
           <td>{{ certificado.encargado.apellido_paterno }} {{ certificado.encargado.apellido_materno }} {{ certificado.encargado.nombres }}</td>
           <td>{{ certificado.empleado.apellido_paterno }} {{ certificado.empleado.apellido_materno }} {{ certificado.empleado.nombres }}</td>
+          <td>{{ certificado.fecha_creacion }}</td> 
           <td>
             <a href="/editarCertificado/{{ certificado.id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
             <a href="javascript:void(0)" onclick="eliminarCertificado('/eliminarCertificado/{{ certificado.id }}');" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
             <a href="{% url 'generar_certificado' certificado.id %}" class="btn btn-success" target="_blank">
               <i class="fas fa-print"></i>
-
-
-         
+            </a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

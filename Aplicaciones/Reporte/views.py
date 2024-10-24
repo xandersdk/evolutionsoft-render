@@ -304,13 +304,15 @@ def nuevoCertificado(request):
 
 def guardarCertificado(request):
     if request.method == 'POST':
-        encargado_id = request.POST.get("encargado")  # Sin la coma
-        empleado_id = request.POST.get("empleado")
+        encargado_id = request.POST.get("encargado")  # Obtener ID del encargado
+        empleado_id = request.POST.get("empleado")    # Obtener ID del empleado
+        fecha = request.POST.get("fecha")  # Obtener la fecha desde el formulario
 
-        # Asegúrate de que estás pasando IDs válidos como enteros
+        # Asegúrate de que estás pasando IDs válidos como enteros y la fecha
         nuevoCertificado = Certificado.objects.create(
             encargado_id=int(encargado_id),
-            empleado_id=int(empleado_id)
+            empleado_id=int(empleado_id),
+            fecha_creacion=fecha  # Guardar la fecha
         )
 
         messages.success(request, "Certificado registrado exitosamente")
@@ -329,17 +331,19 @@ def editarCertificado(request, id):
 
 def procesarActualizacionCertificado(request):
     if request.method == 'POST':
-        id_certificado = request.POST['id']
-        encargado_id = request.POST.get("encargado")
-        empleado_id = request.POST.get("empleado")
+        id_certificado = request.POST.get('id')  # Obtener el ID del certificado
+        encargado_id = request.POST.get("encargado")  # Obtener ID del encargado
+        empleado_id = request.POST.get("empleado")    # Obtener ID del empleado
+        fecha = request.POST.get("fecha")  # Obtener la fecha desde el formulario
 
         try:
             # Obtener el certificado que se va a actualizar
             certificadoConsultado = Certificado.objects.get(id=id_certificado)
 
-            # Actualizar los campos correctamente (sin coma)
+            # Actualizar los campos del certificado
             certificadoConsultado.encargado_id = int(encargado_id)
             certificadoConsultado.empleado_id = int(empleado_id)
+            certificadoConsultado.fecha_creacion = fecha  # Actualizar la fecha
 
             # Guardar los cambios
             certificadoConsultado.save()
@@ -409,7 +413,14 @@ def generar_certificado(request, certificado_id):
     # Configuración del contenido del certificado (centrado debajo del logo y la descripción)
     p.setFont("Helvetica", 12)
     text = p.beginText(100, 580)
-    text.textLine(f"Quito, {fecha_actual}")
+    # Asegúrate de establecer el idioma para los nombres de los meses en español
+    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+
+    # Formatear la fecha al formato deseado
+    fecha_formateada = certificado.fecha_creacion.strftime('%d de %B de %Y')
+
+    # Ahora úsalo en la línea de texto
+    text.textLine(f"Quito, {fecha_formateada}")
     # Convertir nombres y apellidos del encargado a mayúsculas
     encargado_nombre_completo = f"{encargado.nombres.upper()} {encargado.apellido_paterno.upper()} {encargado.apellido_materno.upper()}"
     text.textLine("")

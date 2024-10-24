@@ -9,7 +9,7 @@
       </div>
       <div class="card-body">
         <form action="{% url 'guardarCertificado' %}" enctype="multipart/form-data" id="frm_nuevo_encargado" method="post">
-          {% csrf_token %}      
+          {% csrf_token %}
                  
           <div class="form-group mb-3">
               <label for="encargado"><b>Encargado</b></label>
@@ -28,7 +28,13 @@
                     <option value="{{ empleado.id }}">{{ empleado.apellido_paterno }}  {{ empleado.apellido_materno }}  {{ empleado.nombres }}</option>
                 {% endfor %}
             </select>
-        </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="fecha"><b>Fecha</b></label>
+            <input type="date" name="fecha" id="fecha" class="form-control" max="{{ today_date }}">
+          </div>
+
           <br>
           <div class="text-center">
             <button type="submit" class="btn btn-danger">Guardar</button>
@@ -54,21 +60,29 @@
   // Validación del formulario
   $("#frm_nuevo_encargado").validate({
       rules: {
-                 
-          
           encargado: {
               required: true
           },
           empleado: {
               required: true
+          },
+          fecha: {
+              required: true,
+              max: function() {
+                  return new Date().toISOString().split('T')[0];
+              }
           }
       },
-      messages: {                
+      messages: {
           encargado: {
               required: "Por favor seleccione el encargado",
           },
           empleado: {
               required: "Por favor seleccione el empleado"
+          },
+          fecha: {
+              required: "Por favor seleccione la fecha",
+              max: "No se permiten fechas futuras"
           }
       }
   });

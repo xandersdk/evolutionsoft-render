@@ -28,6 +28,12 @@
                 <option value="{{ empleado.id }}" {% if empleado.id == certificadoEditar.empleado.id %}selected{% endif %}>{{ empleado.apellido_paterno }}  {{ empleado.apellido_materno }}  {{ empleado.nombres }}</option>
                 {% endfor %}
               </select>
+              
+            <div class="form-group mb-3">
+              <label for="fecha"><b>Fecha Creacion:</b></label>
+              <input type="date" name="fecha" id="fecha" class="form-control" value="{{ certificadoEditar.fecha_creacion|date:'Y-m-d' }}" required>
+            </div>
+
             </div>
 
             <div class="text-center">
