@@ -23,7 +23,7 @@
         <tr>
           <th class="tablecolor">ID</th>
           <th class="tablecolor">Encargado</th>
-          <th class="tablecolor">Empleado</th>          
+          <th class="tablecolor">Empleado</th>
           <th class="tablecolor">Acciones</th>
         </tr>
 
@@ -32,12 +32,17 @@
         {% for certificado in certificados %}
         <tr>
           <td>{{ certificado.id }}</td>
-          <td>{{ certificado.encargado.apellido_paterno }}  {{ certificado.encargado.apellido_materno }}  {{ certificado.encargado.nombres }}</td>          
+          <td>{{ certificado.encargado.apellido_paterno }}  {{ certificado.encargado.apellido_materno }}  {{ certificado.encargado.nombres }}</td>
           <td>{{ certificado.empleado.apellido_paterno }} {{ certificado.empleado.apellido_materno }} {{ certificado.empleado.nombres }}</td>
-       
+
           <td>
-            <a href="/editarCertificado/{{ certificado.id }}" class="btn btn-warning">Editar</a>
-            <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">Eliminar</a>
+            <a href="/editarCertificado/{{ certificado.id }}" class="btn btn-warning">
+              <i class="fas fa-edit"></i>
+            </a>
+
+            <a href="javascript:void(0)" onclick="eliminarEmpresa('/eliminarEmpresa/{{ empresa.id }}');" class="btn btn-danger">
+              <i class="fas fa-trash-alt"></i>
+            </a>
           </td>
         </tr>
         {% endfor %}
