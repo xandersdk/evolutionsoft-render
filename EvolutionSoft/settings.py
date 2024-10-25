@@ -145,3 +145,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'EvolutionSoft/media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DEBUG = True
