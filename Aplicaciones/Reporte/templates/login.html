@@ -8,37 +8,36 @@
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'estilo.css' %}">
     
-    <!-- Importar jQuery y jQuery Validation -->
+    <!-- Import jQuery and jQuery Validation -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <form method="POST" id="frm_login">
-            {% csrf_token %}
-            <h2>Iniciar Sesión</h2>
-            <div class="input-group">
-                <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
-                <button type="button" id="togglePassword">👁️</button> <!-- Botón para ver la contraseña -->
-            </div>
-            <button type="submit">Entrar</button>
-            <p class="error-message">
-                {% for message in messages %}
-                    <span>{{ message }}</span>
-                {% endfor %}
-            </p>
-        </form>
+    <div class="login-page">
+        <div class="login-container">
+            <form method="POST" id="frm_login">
+                {% csrf_token %}
+                <h2 class="form-title">Ingresar a su Cuenta</h2>
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                    <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+                </div>
+                <button type="submit" class="btn-submit">Entrar</button>
+                <p class="error-message">
+                    {% for message in messages %}
+                        <span>{{ message }}</span>
+                    {% endfor %}
+                </p>
+            </form>
+        </div>
     </div>
 
-    <!-- Script de validación de formulario y visualización de contraseña -->
     <script>
     $(document).ready(function() {
-        // Validación del formulario
+        // Form validation
         $("#frm_login").validate({
             rules: {
                 username: {
@@ -62,13 +61,13 @@
             }
         });
 
-        // Mostrar/ocultar la contraseña
+        // Show/hide password
         $("#togglePassword").on("click", function() {
             const passwordField = $("#password");
             const type = passwordField.attr("type") === "password" ? "text" : "password";
             passwordField.attr("type", type);
 
-            // Cambiar el ícono según el estado
+            // Change icon accordingly
             $(this).text(type === "password" ? "👁️" : "🙈");
         });
     });
