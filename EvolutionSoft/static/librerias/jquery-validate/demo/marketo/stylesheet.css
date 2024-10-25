@@ -133,9 +133,7 @@ div.login a span {
 	padding: 5px 0px 5px 0px;;
 }
 
-div.login a:hover span {
 
-}
 
 .logo {
 	float: left;
@@ -627,7 +625,6 @@ div.empty {
 
 .nav-left {
 	padding-top: 12px;
-	/*background: url(images/logo_marketo_square.gif) 0 0 no-repeat;*/
 	width: 210px;
 }
 
