@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,6 +85,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'EvolutionSoft.db'),
     }
 }
+DATABASES["default"]= dj_database_url.parse("postgresql://evolutionsoft_user:WQg2KQGeiS0npIfrm4Juk7GmGOaHhSo3@dpg-csdgg5dsvqrc738v1nsg-a.oregon-postgres.render.com/evolutionsoft")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
