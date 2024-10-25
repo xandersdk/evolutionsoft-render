@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'estilo.css' %}">
+    
+    <!-- Importar jQuery y jQuery Validation -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 </head>
 <body>
     <div class="login-container">
-        <form method="POST">
+        <form method="POST" id="frm_login">
             {% csrf_token %}
             <h2>Iniciar Sesión</h2>
             <div class="input-group">
@@ -20,6 +24,7 @@
             <div class="input-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                <button type="button" id="togglePassword">👁️</button> <!-- Botón para ver la contraseña -->
             </div>
             <button type="submit">Entrar</button>
             <p class="error-message">
@@ -29,5 +34,44 @@
             </p>
         </form>
     </div>
+
+    <!-- Script de validación de formulario y visualización de contraseña -->
+    <script>
+    $(document).ready(function() {
+        // Validación del formulario
+        $("#frm_login").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 4
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                username: {
+                    required: "Por favor ingrese su usuario",
+                    minlength: "El usuario debe tener al menos 4 caracteres"
+                },
+                password: {
+                    required: "Por favor ingrese su contraseña",
+                    minlength: "La contraseña debe tener al menos 6 caracteres"
+                }
+            }
+        });
+
+        // Mostrar/ocultar la contraseña
+        $("#togglePassword").on("click", function() {
+            const passwordField = $("#password");
+            const type = passwordField.attr("type") === "password" ? "text" : "password";
+            passwordField.attr("type", type);
+
+            // Cambiar el ícono según el estado
+            $(this).text(type === "password" ? "👁️" : "🙈");
+        });
+    });
+    </script>
 </body>
 </html>
