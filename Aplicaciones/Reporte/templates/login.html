@@ -13,26 +13,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 </head>
 <body>
-    <div class="login-page">
-        <div class="login-container">
-            <form method="POST" id="frm_login">
-                {% csrf_token %}
-                <h2 class="form-title">Ingresar a su Cuenta</h2>
-                <div class="input-group">
-                    <input type="text" id="username" name="username" placeholder="Correo Electrónico" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
-                    <button type="button" id="togglePassword" class="toggle-password">👁️</button>
-                </div>
-                <button type="submit" class="btn-submit">Entrar</button>
-                <p class="error-message">
-                    {% for message in messages %}
-                        <span>{{ message }}</span>
-                    {% endfor %}
-                </p>
-            </form>
-        </div>
+    <div class="login-container">
+        <form method="POST" id="frm_login">
+            {% csrf_token %}
+            <h2>Iniciar sesión</h2>
+            <div class="input-group">
+                <span class="icon"><i class="fas fa-user"></i></span>
+                <input type="text" id="username" name="username" placeholder="Usuario" required>
+            </div>
+            <div class="input-group">
+                <span class="icon"><i class="fas fa-key"></i></span>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            </div>
+            <button type="submit" class="btn-submit">Acceder</button>
+        </form>
     </div>
 
     <script>
@@ -59,16 +53,6 @@
                     minlength: "La contraseña debe tener al menos 6 caracteres"
                 }
             }
-        });
-
-        // Show/hide password
-        $("#togglePassword").on("click", function() {
-            const passwordField = $("#password");
-            const type = passwordField.attr("type") === "password" ? "text" : "password";
-            passwordField.attr("type", type);
-
-            // Change icon accordingly
-            $(this).text(type === "password" ? "👁️" : "🙈");
         });
     });
     </script>
