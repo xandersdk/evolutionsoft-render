@@ -67,7 +67,7 @@ def guardarEmpresa(request):
 # Listado de empresas
 def listadoEmpresas(request):
     empresas = Empresa.objects.all()
-    return render(request, 'listadoEmpresa.html', {'empresas': empresas})
+    return render(request, 'listadoempresa.html', {'empresas': empresas})
 
 # Renderizando formulario para nueva empresa
 def nuevaEmpresa(request):
