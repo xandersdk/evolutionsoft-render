@@ -381,11 +381,7 @@ def generar_certificado(request, certificado_id):
     empleado = certificado.empleado
     encargado = certificado.encargado
 
-    # Establecer la localización a español
-    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
-
-    # Obtener la fecha actual
-    fecha_actual = datetime.now().strftime('%d de %B del %Y')
+   
 
     # Dibujar el logo de la empresa (izquierda)
     if encargado.empresa.logo:
