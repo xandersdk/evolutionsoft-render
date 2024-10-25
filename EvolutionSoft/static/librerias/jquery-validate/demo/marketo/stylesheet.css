@@ -672,7 +672,6 @@ div.empty {
 
 
 .nav-left a.active {
-	/* background: url(images/arrow_d-green.gif) 5px 10px no-repeat; */
 	display: block;
 	height: 24px;
 	text-decoration: none;
