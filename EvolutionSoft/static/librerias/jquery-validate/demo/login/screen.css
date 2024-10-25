@@ -188,26 +188,7 @@
 		clear:both;
 		}
 
-	form fieldset
-		{
-		margin: 0 0 1.5em 0;
-		padding: 0 0 10px 0px;
-		
-		border: 1px solid #BFBAB0;
-		
-		background-color: #F2EFE9;
-		background-image: url(images/fieldset_gradient.jpg);
-		background-repeat: repeat-x;
-		
-		background-color: #fff;
-		background-image: url(images/fieldset-gradient-02.jpg);
-		background-position:bottom;
-		
-		float: left;
-		clear: both;
-		width: 100%;
-		
-		}
+
 	
 	form fieldset.submit
 		{
