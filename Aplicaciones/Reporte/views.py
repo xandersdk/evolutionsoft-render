@@ -450,6 +450,7 @@ def generar_certificado(request, certificado_id):
     text.textLine(f"Email: {encargado.email}")
 
     # Logo de la empresa
+    
     logo_path = os.path.join(settings.STATICFILES_DIRS[0], 'images/logo1.jpeg')
     p.drawImage(logo_path, 400, 320, width=150, height=100, preserveAspectRatio=True)
 
