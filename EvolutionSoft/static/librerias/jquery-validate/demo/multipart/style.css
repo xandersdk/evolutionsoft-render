@@ -181,7 +181,7 @@ input.button {
 	font: bold 12px Arial, Sans-serif;
 	border: 1px solid #EAEAEA;
 	padding: 3px 4px;
-	background: #CCC url(buttonbg.gif) repeat-x left bottom;
+
 	color: #333; /* color: #339900; */
 	cursor: pointer;
 }
@@ -207,7 +207,7 @@ input.submitbutton {
 }
 
 #sidebar #search .textbox {
-	background: #FFF url(input.png) no-repeat top left;
+
 	border: 1px solid #EAEAEA;
 	font-size: 11px;
 	padding: 3px;
@@ -218,7 +218,7 @@ input.submitbutton {
 	margin: 0;
 	font: bold 100% Arial, Sans-serif;
 	border: 1px solid #CCC;
-	background: #CCC url(buttonbg.gif) repeat-x left bottom;
+	
 	padding: 1px;
 	height: 25px;
 	color: #333;
@@ -251,7 +251,7 @@ input.submitbutton {
 	height: 137px;
 	margin: 0;
 	padding: 0;
-	background: #000 url(headerbg.jpg) no-repeat left bottom;
+	
 }
 
 #header h1#logo-text {
@@ -308,7 +308,7 @@ input.submitbutton {
 
 #header-tabs a {
 	float: left;
-	background: url(tableft.gif) no-repeat left top;
+	
 	margin: 0;
 	padding: 0 0 0 4px;
 	text-decoration: none;
@@ -317,7 +317,7 @@ input.submitbutton {
 #header-tabs a span {
 	float: left;
 	display: block;
-	background: url(tabright.gif) no-repeat right top;
+	
 	padding: 7px 15px 4px 8px;
 	color: #CCC;
 }
@@ -376,7 +376,7 @@ input.submitbutton {
 
 #sidebar h1 {
 	padding: 8px 0px 3px 25px;
-	background: url(square_arrow.gif) no-repeat 0% .7em;
+	
 	text-transform: none;
 	color: #339900;
 }
