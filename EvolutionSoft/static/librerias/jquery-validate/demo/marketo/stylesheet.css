@@ -352,7 +352,7 @@ div.action-bottom a {
 	height: 61px;
 	width: 178px;
 	border: 0px;
-	background: url(images/action-bottom.gif) no-repeat 0px 0px;
+	
 	color: #0b2c89;
 	float: left;
 	position: relative;
@@ -374,7 +374,7 @@ div.action-bottom a span.shadow {
 }
 
 .line-grey {
-	background: url(images/line-grey.gif) 0 0 repeat-x;
+	
 	height: 2px;
 	margin: 8px 25px 20px 0;
 }
@@ -383,7 +383,7 @@ div.action-bottom a span.shadow {
 .hero-background {
 	position: relative;
 	width: 880px;
-	background: url(images/back_home-hero.jpg) 10px 0px no-repeat;
+
 	height: 211px;
 	margin: -20px 0px 45px 0px;
 }
@@ -449,7 +449,7 @@ div.action-bottom a span.shadow {
 }
 
 .callout-tan h1 {
-	background: #F4F1E9 url(images/back_tan-fade.gif) 0 0 repeat-y;
+	
 	font-size: 1.1em;
 	text-align: center;
 	margin: 0px;
@@ -477,7 +477,6 @@ div.action-bottom a span.shadow {
 
 /* s4.3 - purple home boxes */
 .box-purple {
-	background: #C6C8E3 url(images/back_home-icons.png) 0px 0px repeat-x;
 	border-left: 1px solid #ffffff;
 	color: #333333;
 	width: 581px;
@@ -504,7 +503,6 @@ div.box-purple a {
 }
 
 .icon-text01 {
-	background-image: url(images/icon_search-engine-market.png);
 	background-repeat: no-repeat;
 }
 
@@ -516,9 +514,7 @@ div.box-purple a {
 		sizingMethod = "crop");
 }
 
-.icon-text02 {
-	background: url(images/icon_landing-pages.png) 0 0 no-repeat;
-}
+
 
 * html .icon-text02 {
 	width: 460px; /* must have a width or heigh tag for ie6*/
@@ -528,9 +524,7 @@ div.box-purple a {
 		"crop");
 }
 
-.icon-text03 {
-	background: url(images/icon_salesforce.png) 0 0 no-repeat;
-}
+
 
 * html .icon-text03 {
 	width: 460px; /* must have a width or heigh tag for ie6*/
@@ -565,12 +559,9 @@ div.box-purple a {
 .callout-news p {
 	margin: 10px 0px 0px 10px;
 	padding: 0px 10px 7px 20px;
-	background: url(images/news.gif) no-repeat left 1px;
 }
 
-.callout-news p a {
 
-}
 
 .callout-news ul {
 	list-style-type: none;
@@ -579,7 +570,6 @@ div.box-purple a {
 }
 
 .callout-news li {
-	background: url(images/icon_news.gif) no-repeat left 2px;
 	padding: 0px 5px 5px 20px;
 }
 
@@ -615,8 +605,7 @@ div.more {
 }
 
 div.more a {
-	background: transparent url(images/arrow_r-blue.gif) no-repeat right 2px
-		;
+		
 	font-weight: bold;
 	padding: 0px 20px 0px 0px;
 	font-weight: bold;
@@ -628,17 +617,13 @@ div.more a:hover {
 }
 
 /* sX.0 - Left Nav */
-.nav-left-back {
-	background: url(images/back_nav_side.gif) 0 0 repeat-x;
-}
+
 
 div.empty {
 	background: #F1F0E5 url(images/back_green-fade.gif) 0 0 repeat-x;
 }
 
-div.empty div.callout-green {
 
-}
 
 .nav-left {
 	padding-top: 12px;
@@ -671,14 +656,12 @@ div.empty div.callout-green {
 }
 
 .nav-left a.open {
-	background-image: url(images/arrow_d-green.gif);
 	background-repeat: no-repeat;
 	background-position: 6px 11px;
 }
 
 .nav-left-header-tab {
 	position: relative; /* ie6 fix */
-	background: url(images/tab_green.gif) 0 0 no-repeat;
 	height: 32px;
 	width: 166px;
 	text-align: center;
@@ -689,9 +672,7 @@ div.empty div.callout-green {
 	display: block;
 }
 
-div.empty div.nav-left-header-tab {
-	background: url(images/tab_green2.gif) 0 0 no-repeat;
-}
+
 
 .nav-left a.active {
 	/* background: url(images/arrow_d-green.gif) 5px 10px no-repeat; */
@@ -757,9 +738,7 @@ div.empty div.nav-left-header-tab {
 	padding-bottom: 20px;
 }
 
-div.main-content div.main-content {
 
-}
 
 .main-content h1 {
 	color: #5890D1;
@@ -950,7 +929,6 @@ div.buttonSubmitHover span {
 a.demoLink {
 	padding: 1px 10px 0px 17px;
 	height: 24px;
-	background: url(images/bullet_triangle_blue.gif) no-repeat 0px 4px;
 	display: block;
 	float: left;
 }
@@ -1011,7 +989,6 @@ div.left-nav-callout h6 {
 }
 
 div.left-nav-callout a {
-	background: url(images/monitor24.gif) no-repeat 0px center;
 	padding: 5px 0px 5px 30px;
 	display: block;
 	font: bold 12px tahoma, geneva;
@@ -1042,8 +1019,7 @@ td.label {
 
 tr.required td.label {
 	font-weight: bold;
-	background: url(/images/forms/backRequiredGray.gif) no-repeat right
-		center;
+		
 }
 
 div.subTableDiv {
@@ -1134,7 +1110,6 @@ div.offerbox div.learnmore {
 }
 
 div#marketoEditions {
-	background: url(images/buynowBack.gif) no-repeat;
 	width: 584px;
 	height: 376px;
 	float: left;
