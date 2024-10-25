@@ -71,7 +71,7 @@ def listadoEmpresas(request):
 
 # Renderizando formulario para nueva empresa
 def nuevaEmpresa(request):
-    return render(request, 'nuevaEmpresa.html')
+    return render(request, 'nuevaempresa.html')
 
 def eliminarEmpresa(request, id):
     empresaEliminar = Empresa.objects.get(id=id)
